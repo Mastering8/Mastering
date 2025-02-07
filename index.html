@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Crypto</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        input, button { margin: 5px; padding: 10px; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Suivi de Portefeuille Crypto</h1>
+    <input type="text" id="crypto" placeholder="Crypto (ex: BTC)">
+    <input type="number" id="quantity" placeholder="Quantité">
+    <input type="number" id="price" placeholder="Prix">
+    <button onclick="addTransaction()">Ajouter</button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Crypto</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Total (€)</th>
+            </tr>
+        </thead>
+        <tbody id="transactions"></tbody>
+    </table>
+
+    <script>
+        function addTransaction() {
+            let crypto = document.getElementById('crypto').value;
+            let quantity = document.getElementById('quantity').value;
+            let price = document.getElementById('price').value;
+            
+            if (!crypto || !quantity || !price) return;
+            
+            let total = (parseFloat(quantity) * parseFloat(price)).toFixed(2);
+            
+            let row = `<tr><td>${crypto}</td><td>${quantity}</td><td>${price}</td><td>${total}€</td></tr>`;
+            document.getElementById('transactions').innerHTML += row;
+            
+            document.getElementById('crypto').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('price').value = '';
+        }
+    </script>
+</body>
+</html>
